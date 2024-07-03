@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, forwardRef } from 'react';
 import {
   Button,
   ConstructorElement,
@@ -16,7 +16,9 @@ export const BurgerConstructorUI: FC<BurgerConstructorUIProps> = ({
   price,
   orderModalData,
   onOrderClick,
-  closeOrderModal
+  closeOrderModal,
+  moveRow,
+  handleMove
 }) => (
   <section className={styles.burger_constructor}>
     {constructorItems.bun ? (
@@ -41,10 +43,12 @@ export const BurgerConstructorUI: FC<BurgerConstructorUIProps> = ({
         constructorItems.ingredients.map(
           (item: TConstructorIngredient, index: number) => (
             <BurgerConstructorElement
+              moveRow={moveRow}
               ingredient={item}
               index={index}
               totalItems={constructorItems.ingredients.length}
               key={item.id}
+              handleMove={handleMove}
             />
           )
         )
