@@ -80,7 +80,7 @@ export const AppRouter = () => {
         <Route
           path={'/feed/:number'}
           element={
-            <Modal title='Order info' onClose={onModalClose}>
+            <Modal title='Информация о заказе' onClose={onModalClose}>
               <OrderInfo />
             </Modal>
           }
@@ -90,7 +90,7 @@ export const AppRouter = () => {
           path={'/profile/orders/:number'}
           element={
             <ProtectedRoute>
-              <Modal title='Order info' onClose={onModalClose}>
+              <Modal title='Информация о заказе' onClose={onModalClose}>
                 <OrderInfo />
               </Modal>
             </ProtectedRoute>
@@ -100,7 +100,7 @@ export const AppRouter = () => {
         <Route
           path={'/ingredients/:id'}
           element={
-            <Modal title='Ingredients Details' onClose={onModalClose}>
+            <Modal title='Описание ингредиента' onClose={onModalClose}>
               <IngredientDetails />
             </Modal>
           }
@@ -112,7 +112,7 @@ export const AppRouter = () => {
           <Route
             path={'/ingredients/:id'}
             element={
-              <Modal title='Ingredients Details' onClose={onModalClose}>
+              <Modal title='Описание ингредиента' onClose={onModalClose}>
                 <IngredientDetails />
               </Modal>
             }
@@ -120,7 +120,7 @@ export const AppRouter = () => {
           <Route
             path={'/feed/:number'}
             element={
-              <Modal title='Order info' onClose={onModalClose}>
+              <Modal title='Информация о заказе' onClose={onModalClose}>
                 <OrderInfo />
               </Modal>
             }
@@ -129,7 +129,7 @@ export const AppRouter = () => {
             path={'/profile/orders/:number'}
             element={
               <ProtectedRoute>
-                <Modal title='Order info' onClose={onModalClose}>
+                <Modal title='Информация о заказе' onClose={onModalClose}>
                   <OrderInfo />
                 </Modal>
               </ProtectedRoute>

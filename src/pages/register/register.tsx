@@ -1,15 +1,20 @@
-import { FC, SyntheticEvent, useEffect, useState } from 'react';
+import { FC, SyntheticEvent, useEffect } from 'react';
 import { RegisterUI } from '@ui-pages';
-import { useDispatch } from '../../services/store';
+import { useDispatch, useSelector } from '../../services/store';
 import { signUp } from '../../services/session/services';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import { getIsAuth } from '../../services/session/selectors';
+import { useForm } from '../../utils/hooks/useForm';
 
 export const Register: FC = () => {
-  const [userName, setUserName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const { values, handleChange, setValues } = useForm({
+    email: '',
+    password: '',
+    userName: ''
+  });
+
+  const { email, password, userName } = values;
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isAuth = useSelector(getIsAuth);
@@ -27,9 +32,9 @@ export const Register: FC = () => {
     e.preventDefault();
     dispatch(
       signUp({
-        email,
+        email: email,
         name: userName,
-        password
+        password: password
       })
     );
   };
@@ -40,9 +45,9 @@ export const Register: FC = () => {
       email={email}
       userName={userName}
       password={password}
-      setEmail={setEmail}
-      setPassword={setPassword}
-      setUserName={setUserName}
+      setEmail={handleChange}
+      setPassword={handleChange}
+      setUserName={handleChange}
       handleSubmit={handleSubmit}
     />
   );

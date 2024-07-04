@@ -1,14 +1,14 @@
 import { FC, useCallback, useMemo } from 'react';
 import { TIngredient } from '@utils-types';
 import { BurgerConstructorUI } from '@ui';
-import { useSelector } from 'react-redux';
-import { useDispatch } from '../../services/store';
+import { useDispatch, useSelector } from '../../services/store';
 import { createOrder } from '../../services/order/services';
 import { orderActions } from '../../services/order/orderSlice';
 import { burgerActions } from '../../services/burger/burgerSlice';
 import { useNavigate } from 'react-router-dom';
 import {
   getOrderError,
+  getOrderIsLoading,
   getOrderModalData
 } from '../../services/order/selectors';
 import { getConstructorItems } from '../../services/burger/selectors';
@@ -16,6 +16,8 @@ import { getConstructorItems } from '../../services/burger/selectors';
 export const BurgerConstructor: FC = () => {
   const constructorItems = useSelector(getConstructorItems);
   const orderError = useSelector(getOrderError);
+  const orderIsLoading = useSelector(getOrderIsLoading);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -88,6 +90,7 @@ export const BurgerConstructor: FC = () => {
       orderRequest={orderRequest}
       constructorItems={constructorItems}
       orderModalData={orderModalData}
+      isLoading={orderIsLoading}
       onOrderClick={onOrderClick}
       closeOrderModal={closeOrderModal}
       handleMove={handleMove}

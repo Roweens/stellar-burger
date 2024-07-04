@@ -1,10 +1,8 @@
 import { Preloader } from '@ui';
 import { FeedUI } from '@ui-pages';
 import { FC, useEffect } from 'react';
-import { StateSchema, useDispatch } from '../../services/store';
+import { StateSchema, useDispatch, useSelector } from '../../services/store';
 import { fetchOrders } from '../../services/order/services';
-import { useSelector } from 'react-redux';
-import { fetchIngredients } from '../../services/ingredients/fetchIngredients';
 import { getOrders } from '../../services/order/selectors';
 
 export const Feed: FC = () => {
@@ -15,7 +13,6 @@ export const Feed: FC = () => {
 
   useEffect(() => {
     handleGetFeeds();
-    dispatch(fetchIngredients());
   }, []);
 
   const handleGetFeeds = () => {

@@ -1,13 +1,19 @@
 import { FC, SyntheticEvent, useEffect, useState } from 'react';
 import { LoginUI } from '@ui-pages';
-import { StateSchema, useDispatch, useSelector } from '../../services/store';
+import { useDispatch, useSelector } from '../../services/store';
 import { signIn } from '../../services/session/services';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { getIsAuth } from '../../services/session/selectors';
+import { useForm } from '../../utils/hooks/useForm';
 
 export const Login: FC = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const { values, handleChange, setValues } = useForm({
+    email: '',
+    password: ''
+  });
+
+  const { email, password } = values;
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isAuth = useSelector(getIsAuth);
@@ -36,9 +42,9 @@ export const Login: FC = () => {
     <LoginUI
       errorText=''
       email={email}
-      setEmail={setEmail}
+      setEmail={handleChange}
       password={password}
-      setPassword={setPassword}
+      setPassword={handleChange}
       handleSubmit={handleSubmit}
     />
   );

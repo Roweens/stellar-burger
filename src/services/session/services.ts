@@ -15,29 +15,21 @@ export const REFRESH_TOKEN_KEY = 'refreshToken';
 
 export const signIn = createAsyncThunk<TUser, TLoginData>(
   'user/sign-in',
-  async (data, { rejectWithValue }) => {
-    try {
-      const result = await loginUserApi(data);
-      setCookie(ACCESS_TOKEN_KEY, result.accessToken);
-      localStorage.setItem(REFRESH_TOKEN_KEY, result.refreshToken);
-      return result.user;
-    } catch (error) {
-      return rejectWithValue('error');
-    }
+  async (data) => {
+    const result = await loginUserApi(data);
+    setCookie(ACCESS_TOKEN_KEY, result.accessToken);
+    localStorage.setItem(REFRESH_TOKEN_KEY, result.refreshToken);
+    return result.user;
   }
 );
 
 export const signUp = createAsyncThunk<TUser, TRegisterData>(
   'user/sign-up',
-  async (data, { rejectWithValue }) => {
-    try {
-      const result = await registerUserApi(data);
-      setCookie(ACCESS_TOKEN_KEY, result.accessToken);
-      localStorage.setItem(REFRESH_TOKEN_KEY, result.refreshToken);
-      return result.user;
-    } catch (error) {
-      return rejectWithValue('error');
-    }
+  async (data) => {
+    const result = await registerUserApi(data);
+    setCookie(ACCESS_TOKEN_KEY, result.accessToken);
+    localStorage.setItem(REFRESH_TOKEN_KEY, result.refreshToken);
+    return result.user;
   }
 );
 
@@ -49,23 +41,16 @@ export const fetchUser = createAsyncThunk<TUser, void>(
     if (!token) {
       return rejectWithValue('No token');
     }
-    try {
-      const result = await getUserApi();
-      return result.user;
-    } catch (error) {
-      return rejectWithValue('error');
-    }
+
+    const result = await getUserApi();
+    return result.user;
   }
 );
 
 export const updateUser = createAsyncThunk<TUser, Partial<TRegisterData>>(
   'user/update-user',
-  async (data, { rejectWithValue }) => {
-    try {
-      const result = await updateUserApi(data);
-      return result.user;
-    } catch (error) {
-      return rejectWithValue('error');
-    }
+  async (data) => {
+    const result = await updateUserApi(data);
+    return result.user;
   }
 );

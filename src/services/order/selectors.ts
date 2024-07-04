@@ -4,6 +4,7 @@ import { StateSchema } from '../store';
 export const getOrders = (state: StateSchema) => state.order.data || [];
 
 export const getOrderError = (state: StateSchema) => state.order.error;
+export const getOrderIsLoading = (state: StateSchema) => state.order.isLoading;
 
 export const getOrderModalData = (state: StateSchema) =>
   state.order.orderModalData;

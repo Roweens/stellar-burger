@@ -3,11 +3,11 @@ import styles from './app.module.css';
 import { AppHeader } from '@components';
 import { AppRouter } from '../../router/AppRouter';
 import { useEffect } from 'react';
-import { useDispatch } from '../../services/store';
+import { useDispatch, useSelector } from '../../services/store';
 import { fetchUser } from '../../services/session/services';
-import { useSelector } from 'react-redux';
 import { Preloader } from '../ui/preloader';
 import { getIsMounted } from '../../services/session/selectors';
+import { fetchIngredients } from '../../services/ingredients/fetchIngredients';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -16,11 +16,17 @@ const App = () => {
   useEffect(() => {
     if (!isMounted) {
       dispatch(fetchUser());
+      dispatch(fetchIngredients());
     }
   }, [isMounted, dispatch]);
 
   if (!isMounted) {
-    return <Preloader />;
+    // без div возникает ошибка Failed to execute 'removeChild' on 'Node'
+    return (
+      <div>
+        <Preloader />
+      </div>
+    );
   }
 
   return (
