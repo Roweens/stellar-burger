@@ -4,9 +4,9 @@ import { OrderInfoUI } from '../ui/order-info';
 import { TIngredient } from '@utils-types';
 import { useSelector } from '../../services/store';
 import { useDispatch } from '../../services/store';
-import { getOrderByNumber } from '../../services/order/selectors';
+import { getProfileOrderByNumber } from '../../services/order/selectors';
 import { useParams } from 'react-router-dom';
-import { fetchOrders } from '../../services/order/services';
+import { fetchProfileOrders } from '../../services/order/services';
 import { getAllIngridients } from '../../services/ingredients/selectors';
 
 export const OrderInfo: FC = () => {
@@ -14,14 +14,14 @@ export const OrderInfo: FC = () => {
   const dispatch = useDispatch();
 
   const orderData = useSelector((state) =>
-    getOrderByNumber(state, Number(number))
+    getProfileOrderByNumber(state, Number(number))
   );
 
   const ingredients: TIngredient[] = useSelector(getAllIngridients);
 
   useEffect(() => {
     if (!orderData) {
-      dispatch(fetchOrders());
+      dispatch(fetchProfileOrders());
     }
   }, [ingredients]);
 

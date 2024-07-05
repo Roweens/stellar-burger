@@ -21,7 +21,6 @@ const App = () => {
   }, [isMounted, dispatch]);
 
   if (!isMounted) {
-    // без div возникает ошибка Failed to execute 'removeChild' on 'Node'
     return (
       <div>
         <Preloader />
