@@ -4,26 +4,40 @@ import { OrderInfoUI } from '../ui/order-info';
 import { TIngredient } from '@utils-types';
 import { useSelector } from '../../services/store';
 import { useDispatch } from '../../services/store';
-import { getProfileOrderByNumber } from '../../services/order/selectors';
-import { useParams } from 'react-router-dom';
-import { fetchProfileOrders } from '../../services/order/services';
+import {
+  getFeedOrderByNumber,
+  getProfileOrderByNumber
+} from '../../services/order/selectors';
+import { useLocation, useParams } from 'react-router-dom';
+import { fetchOrders, fetchProfileOrders } from '../../services/order/services';
 import { getAllIngridients } from '../../services/ingredients/selectors';
 
 export const OrderInfo: FC = () => {
   const { number } = useParams();
   const dispatch = useDispatch();
+  const location = useLocation();
+  console.log(location);
 
-  const orderData = useSelector((state) =>
+  const profileOrderData = useSelector((state) =>
     getProfileOrderByNumber(state, Number(number))
   );
+
+  const feedOrderData = useSelector((state) =>
+    getFeedOrderByNumber(state, Number(number))
+  );
+
+  const isFeed = location.pathname.includes('feed');
+  const orderData = isFeed ? feedOrderData : profileOrderData;
 
   const ingredients: TIngredient[] = useSelector(getAllIngridients);
 
   useEffect(() => {
-    if (!orderData) {
+    if (isFeed) {
+      dispatch(fetchOrders());
+    } else {
       dispatch(fetchProfileOrders());
     }
-  }, [ingredients]);
+  }, [ingredients, isFeed, dispatch]);
 
   const orderInfo = useMemo(() => {
     if (!orderData || !ingredients.length) return null;

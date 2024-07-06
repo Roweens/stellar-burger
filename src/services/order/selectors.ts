@@ -19,3 +19,9 @@ export const getProfileOrderByNumber = createSelector(
   (state: StateSchema, number?: number) => number,
   (orders, number) => orders?.find((order) => order.number === number)
 );
+
+export const getFeedOrderByNumber = createSelector(
+  getOrders,
+  (state: StateSchema, number?: number) => number,
+  (orders, number) => orders?.find((order) => order.number === number)
+);
