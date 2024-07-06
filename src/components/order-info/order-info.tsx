@@ -16,7 +16,6 @@ export const OrderInfo: FC = () => {
   const { number } = useParams();
   const dispatch = useDispatch();
   const location = useLocation();
-  console.log(location);
 
   const profileOrderData = useSelector((state) =>
     getProfileOrderByNumber(state, Number(number))
