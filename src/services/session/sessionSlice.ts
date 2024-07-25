@@ -73,22 +73,25 @@ export const sessionSlice = createSlice({
 
     builder.addCase(signIn.rejected, (state, action) => {
       state.isLoading = false;
+      state.error = 'signIn error';
       if (typeof action.payload === 'string') {
         state.error = action.payload;
       }
     });
 
     builder.addCase(signUp.rejected, (state, action) => {
-      state.isLoading = true;
-      state.error = undefined;
+      state.isLoading = false;
+      state.error = 'signUp error';
+
       if (typeof action.payload === 'string') {
         state.error = action.payload;
       }
     });
 
     builder.addCase(fetchUser.rejected, (state, action) => {
-      state.isLoading = true;
-      state.error = undefined;
+      state.isLoading = false;
+      state.error = 'fetchUser error';
+
       if (typeof action.payload === 'string') {
         state.error = action.payload;
       }
@@ -109,6 +112,8 @@ export const sessionSlice = createSlice({
     });
     builder.addCase(updateUser.rejected, (state, action) => {
       state.isLoading = false;
+      state.error = 'updateUser error';
+
       if (typeof action.payload === 'string') {
         state.error = action.payload;
       }

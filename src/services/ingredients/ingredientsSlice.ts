@@ -50,6 +50,7 @@ export const ingredientsSlice = createSlice({
     });
     builder.addCase(fetchIngredients.rejected, (state) => {
       state.isLoading = false;
+      state.error = 'fetchIngredients error';
     });
   }
 });

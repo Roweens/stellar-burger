@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { v4 as uuid4 } from 'uuid';
 import { BurgerSchema, TIngredientWithUniqueId } from './burgerSchema';
 import { TIngredient } from '@utils-types';
+import { createOrder } from '../order/services';
 
 const initialState: BurgerSchema = {
   burgerConstructor: {
@@ -45,6 +46,14 @@ export const burgerSlice = createSlice({
           (ingridient) => ingridient.uniqueId !== action.payload
         );
     }
+  },
+  extraReducers(builder) {
+    builder.addCase(createOrder.fulfilled, (state) => {
+      state.burgerConstructor = {
+        bun: null,
+        ingredients: []
+      };
+    });
   }
 });
 

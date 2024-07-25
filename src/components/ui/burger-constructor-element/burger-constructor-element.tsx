@@ -19,7 +19,11 @@ export const BurgerConstructorElementUI = forwardRef<
     },
     ref
   ) => (
-    <li className={`${styles.element} mb-4 mr-2`} ref={ref}>
+    <li
+      className={`${styles.element} mb-4 mr-2`}
+      ref={ref}
+      data-testid={`BurgerConstructor${ingredient.type}${ingredient._id}`}
+    >
       <MoveButton
         handleMoveDown={handleMoveDown}
         handleMoveUp={handleMoveUp}

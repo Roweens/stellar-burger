@@ -63,7 +63,6 @@ export const BurgerConstructor: FC = () => {
       []
     );
     const ids = [constructorItems.bun._id, ...ingridientIds];
-
     dispatch(createOrder(ids)).then(() => {
       if (orderError) navigate('/login');
     });

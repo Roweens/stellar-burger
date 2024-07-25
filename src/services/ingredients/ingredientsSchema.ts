@@ -14,5 +14,6 @@ export const mapIngridientTypeToGroup: Record<
 export type IngredientsSchema = {
   isLoading: boolean;
   ingredients: TIngredient[];
+  error?: string;
   data: Record<keyof typeof mapIngridientTypeToGroup, TIngredient[]>;
 };

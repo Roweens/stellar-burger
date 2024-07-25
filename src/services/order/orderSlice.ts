@@ -43,6 +43,7 @@ export const orderSlice = createSlice({
 
     builder.addCase(fetchOrders.rejected, (state, action) => {
       state.isLoading = false;
+      state.error = 'fetchOrders error';
       if (typeof action.payload === 'string') {
         state.error = action.payload;
       }
@@ -64,6 +65,8 @@ export const orderSlice = createSlice({
 
     builder.addCase(fetchProfileOrders.rejected, (state, action) => {
       state.isLoading = false;
+      state.error = 'fetchProfileOrders error';
+
       if (typeof action.payload === 'string') {
         state.error = action.payload;
       }
@@ -85,6 +88,8 @@ export const orderSlice = createSlice({
 
     builder.addCase(createOrder.rejected, (state, action) => {
       state.isLoading = false;
+      state.error = 'createOrder error';
+
       if (typeof action.payload === 'string') {
         state.error = action.payload;
       }
