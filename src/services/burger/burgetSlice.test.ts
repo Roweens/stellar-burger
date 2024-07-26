@@ -1,6 +1,6 @@
 import { expect, test, describe } from '@jest/globals';
-import { burgerReducer, burgerActions } from './burgerSlice';
-import { BurgerSchema, TIngredientWithUniqueId } from './burgerSchema';
+import { burgerReducer, burgerActions, initialState } from './burgerSlice';
+import { TIngredientWithUniqueId } from './burgerSchema';
 
 const testIngredient: TIngredientWithUniqueId = {
   _id: '643d69a5c3f7b9001cfa093e',
@@ -33,17 +33,9 @@ const testIngredient2: TIngredientWithUniqueId = {
 };
 
 describe('burgerSlice actions test', () => {
-  const initialBurgerState: BurgerSchema = {
-    burgerConstructor: {
-      bun: null,
-      ingredients: []
-    },
-    isLoading: false
-  };
-
   test('Add Burger ingredient', () => {
     const newState = burgerReducer(
-      initialBurgerState,
+      initialState,
       burgerActions.addBurgerConstructorItem(testIngredient)
     );
 
@@ -56,7 +48,7 @@ describe('burgerSlice actions test', () => {
   test('Remove Burger ingredient', () => {
     const newState = burgerReducer(
       {
-        ...initialBurgerState,
+        ...initialState,
         burgerConstructor: {
           bun: null,
           ingredients: [testIngredient]
@@ -76,7 +68,7 @@ describe('burgerSlice actions test', () => {
   test('Move ingredient test', () => {
     const newState = burgerReducer(
       {
-        ...initialBurgerState,
+        ...initialState,
         burgerConstructor: {
           bun: null,
           ingredients: [testIngredient, testIngredient2]

@@ -4,7 +4,7 @@ import { BurgerSchema, TIngredientWithUniqueId } from './burgerSchema';
 import { TIngredient } from '@utils-types';
 import { createOrder } from '../order/services';
 
-const initialState: BurgerSchema = {
+export const initialState: BurgerSchema = {
   burgerConstructor: {
     bun: null,
     ingredients: []

@@ -33,7 +33,7 @@ describe('User navigates to article page', () => {
   beforeEach(() => {
     document.cookie = `accessToken=mockAccessToken`;
     localStorage.setItem('refreshToken', 'mockRefreshToken');
-    cy.visit('http://localhost:4000/');
+    cy.visit('/');
 
     cy.intercept('GET', 'https://norma.nomoreparties.space/api/auth/user', {
       fixture: '../fixtures/user.json'
@@ -45,11 +45,11 @@ describe('User navigates to article page', () => {
   });
 
   it('BurgerIngredientsList renders', () => {
-    cy.getByTestId('BurgerIngredientsList').should('exist');
+    cy.getBurgerIngredientsList().should('exist');
   });
 
   it('Ingredient add test', () => {
-    cy.getByTestId('BurgerIngredientsList').should('exist');
+    cy.getBurgerIngredientsList().should('exist');
 
     const bun = cy.getByTestId(`BurgerIngredientbun${testBun._id}`);
     bun.should('exist');
@@ -90,7 +90,7 @@ describe('User navigates to article page', () => {
   });
 
   it('Ingredient modal open test', () => {
-    cy.getByTestId('BurgerIngredientsList').should('exist');
+    cy.getBurgerIngredientsList().should('exist');
 
     const ingredient = cy.getByTestId(`BurgerIngredientmain${testMain._id}`);
     ingredient.should('exist');
@@ -100,7 +100,7 @@ describe('User navigates to article page', () => {
   });
 
   it('Ingredient modal close on icon click test', () => {
-    cy.getByTestId('BurgerIngredientsList').should('exist');
+    cy.getBurgerIngredientsList().should('exist');
 
     const ingredient = cy.getByTestId(`BurgerIngredientmain${testMain._id}`);
     ingredient.should('exist');
@@ -116,7 +116,7 @@ describe('User navigates to article page', () => {
   });
 
   it('Ingredient modal close on overlay click test', () => {
-    cy.getByTestId('BurgerIngredientsList').should('exist');
+    cy.getBurgerIngredientsList().should('exist');
 
     const ingredient = cy.getByTestId(`BurgerIngredientmain${testMain._id}`);
     ingredient.should('exist');
@@ -133,7 +133,7 @@ describe('User navigates to article page', () => {
 
   it('Create order test', () => {
     let orderNumber: number;
-    cy.getByTestId('BurgerIngredientsList').should('exist');
+    cy.getBurgerIngredientsList().should('exist');
     cy.intercept(
       {
         method: 'POST',

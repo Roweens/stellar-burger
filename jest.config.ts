@@ -13,11 +13,7 @@ const config: Config = {
   moduleNameMapper: {
     '@api': '<rootDir>/src/utils/burger-api.ts'
   },
-  moduleDirectories: ['node_modules'],
-  modulePaths: ['<rootDir>src'],
-  globals: {
-    __PROJECT__: 'jest'
-  }
+  modulePaths: ['<rootDir>src']
 };
 
 export default config;
