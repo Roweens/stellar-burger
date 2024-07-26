@@ -1,23 +1,43 @@
-import { FC, useMemo } from 'react';
+import { FC, useEffect, useMemo } from 'react';
 import { Preloader } from '../ui/preloader';
 import { OrderInfoUI } from '../ui/order-info';
 import { TIngredient } from '@utils-types';
+import { useSelector } from '../../services/store';
+import { useDispatch } from '../../services/store';
+import {
+  getFeedOrderByNumber,
+  getProfileOrderByNumber
+} from '../../services/order/selectors';
+import { useLocation, useParams } from 'react-router-dom';
+import { fetchOrders, fetchProfileOrders } from '../../services/order/services';
+import { getAllIngridients } from '../../services/ingredients/selectors';
 
 export const OrderInfo: FC = () => {
-  /** TODO: взять переменные orderData и ingredients из стора */
-  const orderData = {
-    createdAt: '',
-    ingredients: [],
-    _id: '',
-    status: '',
-    name: '',
-    updatedAt: 'string',
-    number: 0
-  };
+  const { number } = useParams();
+  const dispatch = useDispatch();
+  const location = useLocation();
 
-  const ingredients: TIngredient[] = [];
+  const profileOrderData = useSelector((state) =>
+    getProfileOrderByNumber(state, Number(number))
+  );
 
-  /* Готовим данные для отображения */
+  const feedOrderData = useSelector((state) =>
+    getFeedOrderByNumber(state, Number(number))
+  );
+
+  const isFeed = location.pathname.includes('feed');
+  const orderData = isFeed ? feedOrderData : profileOrderData;
+
+  const ingredients: TIngredient[] = useSelector(getAllIngridients);
+
+  useEffect(() => {
+    if (isFeed) {
+      dispatch(fetchOrders());
+    } else {
+      dispatch(fetchProfileOrders());
+    }
+  }, [ingredients, isFeed, dispatch]);
+
   const orderInfo = useMemo(() => {
     if (!orderData || !ingredients.length) return null;
 
